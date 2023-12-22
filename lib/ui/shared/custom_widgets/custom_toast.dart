@@ -5,69 +5,74 @@ import 'package:food_order/ui/shared/utils.dart';
 
 import '../../../core/enums/message_type.dart';
 
-
 class CustomToast {
-
-  static showMessage({ required String message ,  MessageType? messageType = MessageType.INFO })
-  {
+  static showMessage(
+      {required String message, MessageType? messageType = MessageType.INFO}) {
     BotToast.showCustomText(
         duration: Duration(seconds: 2),
-        toastBuilder: (value)
-    {
-      String imageName = 'info';
-      Color shadowColor = Colors.blueAccent;
+        toastBuilder: (value) {
+          String imageName = 'info';
+          Color shadowColor = Colors.blueAccent;
 
-      switch(messageType) {
+          switch (messageType) {
+            case MessageType.INFO:
+              imageName = 'info';
+              shadowColor = Colors.blueAccent;
+              break;
 
-        case MessageType.INFO:
-          imageName = 'info';
-          shadowColor = Colors.blueAccent;
-          break;
+            case MessageType.WARNING:
+              imageName = 'warning';
+              shadowColor = Colors.orangeAccent;
+              break;
 
-        case MessageType.WARNING:
-        imageName = 'warning';
-        shadowColor = Colors.orangeAccent;
-        break;
+            case MessageType.REJECTED:
+              imageName = 'rejected';
+              shadowColor = Colors.red;
+              break;
 
-        case MessageType.REJECTED:
-        imageName = 'rejected';
-        shadowColor = Colors.red;
-        break;
+            case MessageType.SUCCESS:
+              imageName = 'approved';
+              shadowColor = Colors.greenAccent;
+              break;
+            case null:
+              break;
+          }
 
-        case MessageType.SUCCESS:
-        imageName = 'approved';
-        shadowColor = Colors.greenAccent;
-        break;
-      }
-
-
-
-      return Container(
-        width: screenWidth(2),
-        height: screenWidth(2),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: shadowColor.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+          return Container(
+            width: screenWidth(2),
+            height: screenWidth(2),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: shadowColor.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset('images/$imageName.svg' , width: screenWidth(5),  height: screenWidth(5),),
-            SizedBox(height: screenWidth(15),),
-            Text(message , style: TextStyle(fontSize: screenWidth(12),),)
-          ],
-        ),
-      );
-    }
-    );
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  'images/$imageName.svg',
+                  width: screenWidth(5),
+                  height: screenWidth(5),
+                ),
+                SizedBox(
+                  height: screenWidth(15),
+                ),
+                Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: screenWidth(12),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
   }
-
 }
